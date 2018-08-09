@@ -1,0 +1,56 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	 //code
+	 Scanner sc=new Scanner (System.in);
+	 int t=sc.nextInt();
+	 int ta[]=new int[t];
+	 for(int m=0;m<t;m++)
+	 {
+	     int amount=sc.nextInt();
+	     int coins=sc.nextInt();
+	     Integer c[]=new Integer[coins];
+	     for(int i=0;i<coins;i++)
+	     {
+	         c[i]=sc.nextInt();
+	     }
+	     Integer table[][]=new Integer[coins][amount+1];
+	     Collections.sort(Arrays.asList(c));
+	     for(int i=0;i<coins;i++)
+	     {
+	         table[i][0]=0;
+	     }
+	     for(int i=0;i<=amount;i++ )
+	     {
+	         table[0][i]=i/c[0];
+	     }
+	  //  
+	     
+	        for(int i=1;i<coins;i++)
+	        {
+	     for(int j=1;j<=amount;j++)
+	     {
+	         
+	         if(j>=c[i])
+	         {
+	             table[i][j]=Math.min(table[i-1][j],table[i][j-c[i]]+1);
+	             
+	         }
+	        
+	         else
+	         table[i][j]=table[i-1][j];
+	     }
+	        }
+	        ta[m]=table[coins-1][amount];
+	 }
+	 
+	 for(int i=0;i<t;i++)
+	 {
+	     System.out.println(ta[i]);
+	 }
+	 }
+}
